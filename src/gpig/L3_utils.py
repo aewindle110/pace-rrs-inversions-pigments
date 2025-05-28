@@ -1,14 +1,3 @@
-import numpy as np
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, BoundaryNorm
-import xarray as xr
-import earthaccess
-import sys
-import math
-from rrs_inversion_pigments import rrs_inversion_pigments
-
 '''
 Max Danenhower
 
@@ -17,6 +6,20 @@ chlorophyll c1+c2, and photoprotective carotenoids (PPC) concentrations using an
 pigment concentrations on a color map. Also includes a method to estimate chlorophyll b, c1+c2, and PPC pigments by donwloading chlorophyll a
 data from PACE and then applying a covariation method. 
 '''
+
+import sys
+import math
+
+import numpy as np
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap, BoundaryNorm
+import xarray as xr
+import earthaccess
+
+from .rrs_inversion_pigments import rrs_inversion_pigments
+
 
 def load_data(tspan, resolution):
     '''
@@ -41,7 +44,7 @@ def load_data(tspan, resolution):
     '''
 
     rrs_results = earthaccess.search_data(
-        short_name='PACE_OCI_L3M_RRS_NRT',
+        short_name='PACE_OCI_L3M_RRS',
         temporal=tspan,
         granule_name='*.DAY.*.Rrs.' + resolution + '.*'
     )

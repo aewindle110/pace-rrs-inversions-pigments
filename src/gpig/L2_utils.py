@@ -1,14 +1,3 @@
-import numpy as np
-import cartopy.crs as ccrs
-import cartopy.feature as cfeature
-import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap, BoundaryNorm
-import xarray as xr
-import earthaccess
-import sys
-import math
-from rrs_inversion_pigments import rrs_inversion_pigments
-
 '''
 Max Danenhower
 
@@ -18,6 +7,20 @@ pigment concentrations on a color map. These methods uses PACE's level 2 apparen
 and their associate uncertainties. Level 2 files contain data from one swath of the PACE satellite, meaning the data are confined to 
 the area of the swath. Level 2 files have 1km resolution. 
 '''
+
+import sys
+import math
+
+import numpy as np
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap, BoundaryNorm
+import xarray as xr
+import earthaccess
+
+from .rrs_inversion_pigments import rrs_inversion_pigments
+
 
 def load_data(tspan, bbox):
     '''
@@ -42,7 +45,7 @@ def load_data(tspan, bbox):
     '''
 
     L2_results = earthaccess.search_data(
-        short_name='PACE_OCI_L2_AOP_NRT',
+        short_name='PACE_OCI_L2_AOP',
         bounding_box=bbox,
         temporal=tspan,
         count=1
