@@ -150,7 +150,7 @@ def rrs_inversion_pigments(Rrs, Rrs_unc, wl, temp, sal):
 
     # multiply each Gaussian by the initial guess amplitude
     for i in range(len(peak_locs)):
-        gaus[:, i] = Amp0[i + 8] * gaus[:, i]
+        gaus[:, i] = Amp2[i + 8] * gaus[:, i]
 
     # Sum all of the Gaussians to get a_phi
     APHI = np.zeros(len(wl))
@@ -169,7 +169,7 @@ def rrs_inversion_pigments(Rrs, Rrs_unc, wl, temp, sal):
     fluor = np.zeros_like(wl)
     fluor = np.exp(-0.5 * ((wl - 685) / 10.6)**2)
 
-    F = Amp0[7]*fluor
+    F = Amp2[7]*fluor
 
     denom = AP.T + CDOM.T + a_sw.T + BBP.T + bb_sw
     numer = BBP.T + bb_sw + F
@@ -464,7 +464,7 @@ def betasw124_ZHH2009(lambda_, S, Tc, delta=0.039):
 
 def tempsal_corr(lambda_):
     """ """
-    with resources.path(__name__, "resources/Sullivan_pure_water_temp_sal.csv") as p:
+    with resources.path("gpig.resources", "Sullivan_pure_water_temp_sal.csv") as p:
         pwts = pd.read_csv(p)
 
     if lambda_.min() < 400 or lambda_.min() > 750:
